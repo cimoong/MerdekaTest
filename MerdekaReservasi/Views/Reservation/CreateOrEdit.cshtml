@@ -1,0 +1,63 @@
+﻿@model MerdekaReservasi.Models.TblTReservasi
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Reservation Form</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ReservasiPk" />
+            <div class="form-group @(Model.ReservasiPk == 0?"":"d-none")">
+                <label asp-for="RuanganFk" class="control-label"></label>
+                <select asp-for="RuanganFk" class="form-control" asp-items="ViewBag.RuanganFk"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubjectReservasi" class="control-label"></label>
+                <input asp-for="SubjectReservasi" class="form-control" />
+                <span asp-validation-for="SubjectReservasi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TanggalReservasi" class="control-label"></label>
+                <input asp-for="TanggalReservasi" type="date" asp-format="{0:yyyy-MM-dd}"  class="form-control" />
+                <span asp-validation-for="TanggalReservasi" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="JamMulai" class="control-label"></label>
+                        <input asp-for="JamMulai" type="time" class="form-control" />
+                        <span asp-validation-for="JamMulai" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="JamSelesai" class="control-label"></label>
+                        <input asp-for="JamSelesai" type="time" class="form-control" />
+                        <span asp-validation-for="JamSelesai" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

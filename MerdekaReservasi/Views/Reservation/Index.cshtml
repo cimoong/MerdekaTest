@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MerdekaReservasi.Models.TblTReservasiIndex>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Reservation</h4>
+<hr />
+<form method="get" asp-action="Index">
+    <div class="row col-md-12">
+        <p>
+            <input type="search" placeholder="Ruangan" value="@ViewData["GetRuanganFkSearchDt"]" name="RuanganFKSearch" style="width:200px;" />
+            <input type="search" placeholder="Subject" value="@ViewData["GetSubjectReservasiDt"]" name="SubjectReservasiSearch" style="width:200px;" />
+            <input type="submit" value="Search" class="btn btn-primary" />
+            <a asp-action="Index">Get All Data</a>
+        </p>
+    </div>
+</form>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model =>  model.RuanganFk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectReservasi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TanggalReservasi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JamMulai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JamSelesai)
+            </th>
+            <th>
+                <a asp-action="CreateOrEdit" class="btn btn-outline-success"><i class="fa fa-plus-square"></i> Reservation</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamaRuangan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectReservasi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StringTanggalReservasi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JamMulai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JamSelesai)
+                </td>
+                <td>
+                    <a asp-action="CreateOrEdit" asp-route-id="@item.ReservasiPk"><i class="fa fa-marker fa-lg"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.ReservasiPk" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash-alt fa-lg"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
